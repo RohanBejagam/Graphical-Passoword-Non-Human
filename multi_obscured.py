@@ -1,3 +1,5 @@
+import os
+import sqlite3
 import tkinter
 from tkinter import *
 import custom_button
@@ -25,24 +27,33 @@ def start(window):
     obscuredImages = utils.getObscuredImages()
     num = random.randint(1, len(obscuredImages) - 1)
     filename = obscuredImages[num]
-    filepath = "obscuredImages/original_obscure.txt"
-    original_text.clear()
+    # filepath = "obscuredImages/original_obscure.txt"
+    global original_text
 
-    f = open(filepath, "r")
+    # f = open(filepath, "r")
 
-    while True:
-        string = f.readline()
-        s1 = string.split(' ')[0]
-        if s1 == filename[0:len(filename) - 4]:
-            break
-    # print(string)
-    string = string.split(' ')
-    string.pop(0)
-    string=' '.join(string)
-    string = string.replace(' ', '-')
-    string = string
-    original_text.append(string.rstrip())
-    f.close()
+    # while True:
+    #     string = f.readline()
+    #     s1 = string.split(' ')[0]
+    #     if s1 == filename[0:len(filename) - 4]:
+    #         break
+    # # print(string)
+    # string = string.split(' ')
+    # string.pop(0)
+    # string=' '.join(string)
+    # string = string.replace(' ', '-')
+    # string = string
+    # original_text.append(string.rstrip())
+    # f.close()
+    def fetcher():
+        base_name, extension = os.path.splitext(filename)
+        conn = sqlite3.connect('obscuredImages/obscure_db.db')
+        cursor = conn.cursor()
+        
+        cursor.execute('SELECT original_obscured from obscured_table where filename=?',[base_name,])
+        return cursor.fetchone()[0]
+    
+    original_text=fetcher().rstrip()
 
     obscure_frame = Frame(window, height=600, width=1280)
     obscure_frame.pack(fill='both', expand=1)
@@ -86,10 +97,10 @@ def start(window):
         input_text = input_text.lower()
         input_text = input_text.replace(' ', '-')
 
-        print("Original Text = ", original_text[0])
+        print("Original Text = ", original_text)
         print("Input Text = ", input_text)
 
-        if original_text[0] == input_text:
+        if original_text == input_text:
             print("Authenticated")
             print("Going to garbled")
             utils.create_popup(msg="Loading next method...", font="Gabriola 28 bold")

@@ -92,6 +92,7 @@ def start(window):
         if original_text[0] == input_text:
             print("Authenticated")
             print("Going to garbled")
+            utils.create_popup(msg="Loading next method...", font="Gabriola 28 bold")
             load_garbled(window,obscure_frame)
             # utils.create_popup(msg="Authenticated :)", font="Gabriola 28 bold")
         else:

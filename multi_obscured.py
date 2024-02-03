@@ -35,7 +35,7 @@ def start(window):
         s1 = string.split(' ')[0]
         if s1 == filename[0:len(filename) - 4]:
             break
-    print(string)
+    # print(string)
     string = string.split(' ')
     string.pop(0)
     string=' '.join(string)

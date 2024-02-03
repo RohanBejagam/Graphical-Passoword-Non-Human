@@ -130,6 +130,7 @@ def authenticate(window, login_frame, selected_image, selected_password, selecte
                     auth=1
                     utils.create_popup(msg="Loading next method...", font="Gabriola 28 bold")
                     # messagebox.showinfo("Login System", "Authenticated!!")
+                    load_segments(window,login_frame)
                     break
                 else:
                     print("image is not correct")

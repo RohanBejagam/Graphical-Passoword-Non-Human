@@ -128,6 +128,7 @@ def authenticate(window, login_frame, selected_image, selected_password, selecte
                 if image == selected_image:
                     print("password level authenticated!!")
                     auth=1
+                    utils.create_popup(msg="Loading next method...", font="Gabriola 28 bold")
                     # messagebox.showinfo("Login System", "Authenticated!!")
                     break
                 else:

@@ -88,7 +88,7 @@ def create_popup(size="500x200", msg="default", font='Arial 24', x=140, y=70):
     win.title("Message")
     Label(win, text=msg, font=font).place(x=x, y=y)
 
-    for i in range(300000):
+    for i in range(200000):
         win.update_idletasks()
         win.update()
 

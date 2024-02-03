@@ -1,3 +1,4 @@
+import os
 import tkinter
 from tkinter import *
 import custom_button
@@ -33,8 +34,11 @@ def start(window):
     img = ImageTk.PhotoImage(img)
     canvas.create_image(10, 10, anchor=NW, image=img)
     canvas.pack(padx=10, pady=10)
-
-    imgList = utils.getSegmentedImages("circle")
+    all_items= os.listdir("segmentedImages")
+    folders = [item for item in all_items if os.path.isdir(os.path.join("segmentedImages", item))]
+    selected_set = folders[random.randint(0,len(folders)-1)]
+    print(selected_set)
+    imgList = utils.getSegmentedImages(selected_set)
     random.shuffle(imgList)
     imgClickData = []
 

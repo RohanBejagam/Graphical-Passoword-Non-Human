@@ -1,3 +1,4 @@
+import os
 import tkinter
 from tkinter import *
 import custom_button
@@ -36,8 +37,12 @@ def start(window):
     img = ImageTk.PhotoImage(img)
     canvas.create_image(10, 10, anchor=NW, image=img)
     canvas.pack(padx=10, pady=10)
-
-    imgList = utils.getSegmentedImages("circle")
+    all_items= os.listdir("segmentedImages")
+    folders = [item for item in all_items if os.path.isdir(os.path.join("segmentedImages", item))]
+    selected_set = folders[random.randint(0,len(folders)-1)]
+    print(selected_set)
+    imgList = utils.getSegmentedImages(selected_set)
+    # imgList = utils.getSegmentedImages("circle")
     random.shuffle(imgList)
     imgClickData = []
 
@@ -100,7 +105,7 @@ def start(window):
 
             if (sortedClickList[0].id == 1) and (sortedClickList[1].id == 2) and (sortedClickList[2].id == 3) and (
                     sortedClickList[3].id == 4):
-                utils.create_popup(msg="Authenticated :)", font="Gabriola 28 bold")
+                utils.create_popup(msg="Loading next method...", font="Gabriola 28 bold")
                 # load_menu(window, segments_frame)
                 load_multi_obs(window,segments_frame)
             else:

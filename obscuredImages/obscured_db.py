@@ -41,7 +41,6 @@ for line in f:
     text=data[1:]
     obscured_text_temp = '-'.join(text)
     obscured_text_temp = obscured_text_temp[:-1]
-    # print(obscured_text_temp+" next like ki poindi")
     
     insert_data(filename,obscured_text_temp)
     

@@ -65,7 +65,7 @@ def start(window):
                   font=('Calibri', 20))
     label.pack(padx=40, pady=10)
     tag_line=Label(obscure_frame,text="Say 'STOP' inorder to stop recording", font=('Calibri',15))
-    tag_line.pack(padx=40, pady=10)
+    tag_line.pack(padx=30, pady=5)
 
     canvas = Canvas(obscure_frame, width=450, height=300)
     img = (Image.open("obscuredImages/" + filename))
@@ -115,7 +115,7 @@ def start(window):
     img2 = img2.resize((200, 170))
     img2 = ImageTk.PhotoImage(img2)
     canvas2.create_image(10, 10, anchor=NW, image=img2)
-    canvas2.pack(padx=20, pady=20)
+    canvas2.pack(padx=20, pady=10)
 
     custom_button.TkinterCustomButton(master=obscure_frame, text="Go Back", height=40, corner_radius=10,
                                       command=lambda: load_menu(window, obscure_frame)).place(relx=0.08, rely=0.08,

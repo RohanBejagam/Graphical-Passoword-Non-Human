@@ -11,8 +11,8 @@ import utils
 from PIL import ImageTk, Image
 from tkinter import Entry
 
-import password_register
 import multi_login
+import multi_register
 
 def load_menu(window, frame):
     frame.pack_forget()
@@ -39,7 +39,7 @@ def start(window):
     
     def register():
         password_selector.pack_forget()
-        password_register.start(window)
+        multi_register.start(window)
         
     custom_button.TkinterCustomButton(master=window, text="Register", width=200, height=80, corner_radius=20, text_font=btn_font,fg_color="#999e9b",hover_color="#4888f0",
                                       command= register, image=img1).place(relx=0.5, rely=0.4, anchor=CENTER)

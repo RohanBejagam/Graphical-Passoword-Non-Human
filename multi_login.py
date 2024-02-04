@@ -1,5 +1,6 @@
 from tkinter import messagebox
 import copy
+import sqlite3
 import hashlib
 import random 
 import tkinter
@@ -12,14 +13,14 @@ from PIL import ImageTk, Image
 from tkinter import Entry
 import password
 import multi_segments 
-
+import multi_level
 
 s_image = []
 s_image.append("")
 width=0
 def load_menu(window, frame):
     frame.pack_forget()
-    password.start(window)
+    multi_level.start(window)
 
 def load_segments(window,frame):
     frame.pack_forget()
@@ -34,7 +35,7 @@ def clicked(canvases, canvas, img_name, event):
     base_name, extension = os.path.splitext(img_name)
     base_name_without_number = ''.join(filter(lambda x: not x.isdigit(), base_name))
     s_image[0] = base_name_without_number
-    print(s_image[0])
+    # print(s_image[0])
 
 def get_images_from_directory(category, num_images):
     directory = "credentialImages"
@@ -98,54 +99,57 @@ def authenticate(window, login_frame, selected_image, selected_password, selecte
     h = hashlib.new('sha512_256')
     h.update(selected_password.encode())
     selected_password = h.hexdigest()
-    filepath = "credentialImages/orig_credentials.txt"  # File Path
-    f = open(filepath, "r")
-    name = ""
-    password = ""
-    image = ""
-    str = ""
-    isUser = 0
-    # file reading to get original credentials
-    while True:
-        string = f.readline()  # Reading file line by line
-        if string == "":
-            if (isUser == 0):
-                print("username not exist")
-                messagebox.showinfo("Login System", "password is not correct")
-            break
-        info = string.split(" ")
-        name = copy.deepcopy(info[0])
-        password = copy.deepcopy(info[1])
-        image = copy.deepcopy(info[2])
-        name = name.rstrip()
-        password = password.rstrip()
-        image = image.rstrip()
+    # filepath = "credentialImages/orig_credentials.txt"  # File Path
+    # f = open(filepath, "r")
+    cursor.execute('SELECT username, password, image_category FROM credentials_table WHERE username=?',(selected_name,))
+    result=cursor.fetchone()
+    
+    # str = ""
+    # isUser = 0
+    # # file reading to get original credentials
+    # while True:
+    #     string = f.readline()  # Reading file line by line
+    #     if string == "":
+    #         if (isUser == 0):
+    #             print("username not exist")
+    #             messagebox.showinfo("Login System", "password is not correct")
+    #         break
+    #     info = string.split(" ")
+    #     name = copy.deepcopy(info[0])
+    #     password = copy.deepcopy(info[1])
+    #     image = copy.deepcopy(info[2])
+    #     name = name.rstrip()
+    #     password = password.rstrip()
+    #     image = image.rstrip()
 
         # checks the credentials by somparing with original one
-        if name == selected_name:
-            isUser = 1
-            if password == selected_password:
-                if image == selected_image:
-                    print("password level authenticated!!")
-                    auth=1
-                    utils.create_popup(msg="Loading next method...", font="Gabriola 28 bold")
-                    # messagebox.showinfo("Login System", "Authenticated!!")
-                    load_segments(window,login_frame)
-                    break
-                else:
-                    print("image is not correct")
-                    messagebox.showinfo("Login System", "Wrong Username/Password")
-                    break
+    if not result:
+        # print("password is not correct")
+        messagebox.showinfo("Login System", "Wrong Username/Password")
+    else:
+        username,password,image=result
+        if password == selected_password:
+            if image == selected_image:
+                print("password level authenticated!!")
+                auth=1
+                utils.create_popup(msg="Loading next method...", font="Gabriola 28 bold")
+                # messagebox.showinfo("Login System", "Authenticated!!")
+                # load_segments(window,login_frame)
+                # break
             else:
-                print("password is not correct")
+                print("image is not correct")
                 messagebox.showinfo("Login System", "Wrong Username/Password")
-                for c in canvases:
-                    c.config(highlightthickness=0)
-                new_photo_images, new_canvases = new_images(login_frame)
-                # Replace old references with new ones
-                photo_images[:] = new_photo_images
-                canvases[:] = new_canvases
-                break
+                # break
+        else:
+            print("password is not correct")
+            messagebox.showinfo("Login System", "Wrong Username/Password")
+            for c in canvases:
+                c.config(highlightthickness=0)
+            new_photo_images, new_canvases = new_images(login_frame)
+            # Replace old references with new ones
+            photo_images[:] = new_photo_images
+            canvases[:] = new_canvases
+            # break
     if auth == 1:
         load_segments(window,login_frame)
 
@@ -204,4 +208,9 @@ def create_canvas(window):
     window.mainloop()
 
 def start(window):
+    global cursor,conn
+    conn=sqlite3.connect("credentialImages/credentials_db.db")
+    cursor=conn.cursor()
+    print('Database connected Login Page')
     create_canvas(window)
+    conn.close()

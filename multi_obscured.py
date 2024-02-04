@@ -50,7 +50,7 @@ def start(window):
         conn = sqlite3.connect('obscuredImages/obscure_db.db')
         cursor = conn.cursor()
         
-        cursor.execute('SELECT original_obscured from obscured_table where filename=?',[base_name,])
+        cursor.execute('SELECT original_obscured from obscured_table where filename=?',(base_name,))
         return cursor.fetchone()[0]
     
     original_text=fetcher().rstrip()

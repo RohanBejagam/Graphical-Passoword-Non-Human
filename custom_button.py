@@ -231,6 +231,8 @@ class TkinterCustomButton(tkinter.Frame):
 
             self.image_label.bind("<Button-1>", self.clicked)
             self.image_label.bind("<Button-1>", self.clicked)
+            self.text_label.bind("<Button-1>", self.clicked)
+            self.text_label.bind("<Button-1>", self.clicked)
             self.canvas.bind("<Button-1>", self.clicked)
             self.set_text(self.text)
 

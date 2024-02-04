@@ -21,6 +21,10 @@ def start(window):
     window.title("Password Image Authentication System")
     password_selector = Frame(window, height=600, width=1280)
     password_selector.pack(fill='both', expand=1)
+    
+    label = Label(password_selector, text="Traditional Password Based Authentication System\nIncluding Image selection", font=('Freestyle Script', 50))
+    label.pack(padx=40, pady=30)
+    
     img1 = Image.open("assets/register.png")
     img1 = img1.resize((50, 50))
     img1 = ImageTk.PhotoImage(img1)
@@ -37,11 +41,11 @@ def start(window):
         password_register.start(window)
         
     custom_button.TkinterCustomButton(master=window, text="Register", width=200, height=80, corner_radius=20, text_font=btn_font,fg_color="#999e9b",hover_color="#4888f0",
-                                      command= register, image=img1).place(relx=0.5, rely=0.3, anchor=CENTER)
+                                      command= register, image=img1).place(relx=0.5, rely=0.45, anchor=CENTER)
 
     # Button to switch to the login page
     custom_button.TkinterCustomButton(master=window, text="Login", width=200,height=80, corner_radius=20,text_font=btn_font,fg_color="#5ae883",hover_color="#0ac244",
-                                      command= login, image=img2).place(relx=0.5, rely=0.5, anchor=CENTER)
+                                      command= login, image=img2).place(relx=0.5, rely=0.6, anchor=CENTER)
     custom_button.TkinterCustomButton(master=window, text="Go Back", height=40, corner_radius=10,
                                       command=lambda: load_menu(window,password_selector)).place(relx=0.08, rely=0.08, anchor=CENTER)
     

@@ -20,8 +20,14 @@ conn.commit()
 print('Table Created')
 
 def insert_data(filename, original_obscured):
-    # Insert data into the table
-    cursor.execute('INSERT INTO obscured_table (filename, original_obscured) VALUES (?, ?)', (filename, original_obscured))
+    cursor.execute('SELECT * FROM obscured_table WHERE filename = ? AND original_obscured = ?', (filename, original_obscured))
+    existing_data = cursor.fetchone()
+
+    # If data does not exist, insert it
+    if not existing_data:
+        # Insert data into the table
+        cursor.execute('INSERT INTO obscured_table (filename, original_obscured) VALUES (?, ?)', (filename, original_obscured))
+        conn.commit()
     
 image_folder = '.'
 

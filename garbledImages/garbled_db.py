@@ -20,10 +20,15 @@ conn.commit()
 print('Table Created')
 
 def insert_data(filename, original_text):
-    # Insert data into the table
-    cursor.execute('INSERT INTO garbled_table (filename, original_text) VALUES (?, ?)', (filename, original_text))
+    cursor.execute('SELECT * FROM garbled_table WHERE filename = ? AND original_text = ?', (filename, original_text))
+    existing_data = cursor.fetchone()
+    # If data does not exist, insert it
+    if not existing_data:
+        # Insert data into the table
+        cursor.execute('INSERT INTO garbled_table (filename, original_text) VALUES (?, ?)', (filename, original_text))
+        conn.commit()
     
-image_folder = 'B:/Major_Project/Graphical-Password-Authentication-System-main/garbledImages'
+image_folder = '.'
 
 # Iterate through each file in the folder
 for filename in os.listdir(image_folder):

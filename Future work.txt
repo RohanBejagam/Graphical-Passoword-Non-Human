@@ -1,9 +1,9 @@
-Registration form Type 4 lo
+Registration form Type 4 lo ---- done
 
-Timer for Type 1, Type 3
+Timer for Type 1, Type 3  --- type 1 done
 
 Timer for 30 seconds, and then reload   --- done
 
 Jumble the Type 4 images order ---- done
 
-stop mention in voice module 
+stop mention in voice module  ----- done

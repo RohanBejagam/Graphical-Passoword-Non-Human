@@ -11,6 +11,7 @@ import utils
 from PIL import ImageTk, Image
 from tkinter import Entry
 import password
+import multi_level
 
 
 s_image = []
@@ -18,7 +19,7 @@ s_image.append("")
 
 def load_menu(window, frame):
     frame.pack_forget()
-    password.start(window)
+    multi_level.start(window)
 
 # saves image selected by user
 def clicked(canvas, img_name, event):
@@ -190,7 +191,3 @@ def start(window):
     print('Table exists/created')
     create_registration_canvas(window)
     conn.close()
-    
-    
-    
-    

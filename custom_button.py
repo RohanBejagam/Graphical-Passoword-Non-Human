@@ -23,8 +23,8 @@ class TkinterCustomButton(tkinter.Frame):
 
     def __init__(self,
                  bg_color=None,
-                 fg_color="#2874A6",
-                 hover_color="#5499C7",
+                 fg_color="#219A6E",
+                 hover_color="#3EB489",
                  border_color=None,
                  border_width=0,
                  command=None,

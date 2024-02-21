@@ -38,7 +38,7 @@ def start(win):
     menu_frame = Frame(win, height=600, width=1280,bg="#F5F5DC")
     menu_frame.pack(fill='both', expand=1)
 
-    label = Label(menu_frame, text="Graphical Password Authentication System \nfor Non-Human Intruder Defence", font=('Goudy Old Style', 35),bg="#F5F5DC")
+    label = Label(menu_frame, text="Main Menu", font=('Goudy Old Style', 35),bg="#F5F5DC")
     label.pack(padx=40, pady=30)
 
     btn_height = 90

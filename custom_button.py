@@ -33,7 +33,7 @@ class TkinterCustomButton(tkinter.Frame):
                  corner_radius=10,
                  text_font=None,
                  text_color="white",
-                 text="CustomButton",
+                 text="",
                  hover=True,
                  image=None,
                  *args, **kwargs):

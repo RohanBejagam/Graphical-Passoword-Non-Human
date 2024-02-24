@@ -12,6 +12,8 @@ from PIL import ImageTk, Image
 from tkinter import Entry
 import password
 import multi_level
+import multi_login
+
 
 
 s_image = []
@@ -20,6 +22,9 @@ s_image.append("")
 def load_menu(window, frame):
     frame.pack_forget()
     multi_level.start(window)
+def load_login(window,frame):
+    frame.pack_forget()
+    multi_login.start(window)
 
 # saves image selected by user
 def clicked(canvas, img_name, event):
@@ -36,8 +41,10 @@ def get_images_from_directory(category, num_images):
     return selected_images
 
 #register
-def register(selected_image,selected_password, selected_name,selected_reenter_password):
+global auth
+def register(window,registration_frame,selected_image,selected_password, selected_name,selected_reenter_password):
     # checks if there is no empty entry
+    auth=0
     if selected_name == "" and selected_password == "":
         messagebox.showinfo("Registration System", "Please enter the Username and Password")
     elif selected_name == "":
@@ -65,10 +72,12 @@ def register(selected_image,selected_password, selected_name,selected_reenter_pa
             cursor.execute("INSERT INTO credentials_table (username,password,image_category) VALUES (?, ?, ?)",(selected_name,selected_password,selected_image))
             conn.commit()
             messagebox.showinfo("Registration System","User Registered Successfully!")
+            auth=1
         else:
             # print("Username already exists!!")
             messagebox.showinfo("Registration System", "Username already exists!!")
-    
+    if auth==1:
+        load_login(window,registration_frame)
     
     # file reading to get original credentials
     # while True:
@@ -179,7 +188,7 @@ def create_registration_canvas(window):
 
     # Registration button
     custom_button.TkinterCustomButton(master=registration_frame, text="Register", height=40, corner_radius=10,
-                                      command=lambda: register(s_image[0], password_entry.get(), user_entry.get(), reenter_password_entry.get())).place(relx=0.5, rely=0.8, anchor=CENTER)
+                                      command=lambda: register(window,registration_frame,s_image[0], password_entry.get(), user_entry.get(), reenter_password_entry.get())).place(relx=0.5, rely=0.8, anchor=CENTER)
     
     # Back Button
     custom_button.TkinterCustomButton(master=registration_frame, text="Go Back", height=40, corner_radius=10,

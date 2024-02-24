@@ -40,7 +40,7 @@ def get_images_from_directory(category, num_images):
 
 #register
 global auth
-def register(selected_image,selected_password, selected_name,selected_reenter_password):
+def register(window, registration_frame,selected_image,selected_password, selected_name,selected_reenter_password):
     # checks if there is no empty entry
     auth=0
     if selected_name == "" and selected_password == "":
@@ -75,7 +75,10 @@ def register(selected_image,selected_password, selected_name,selected_reenter_pa
             # print("Username already exists!!")
             messagebox.showinfo("Registration System", "Username already exists!!")
     
-    
+    if auth == 1:
+        load_login(window, registration_frame)
+
+
     # file reading to get original credentials
     # while True:
     #     string = f.readline()  # Reading file line by line
@@ -265,7 +268,7 @@ def create_registration_canvas(window):
 
     # Registration button
     custom_button.TkinterCustomButton(master=registration_frame, text="Register", height=40, corner_radius=10,
-                                      command=lambda: register(s_image[0], password_entry.get(), user_entry.get(), reenter_password_entry.get())).place(relx=0.5, rely=0.8, anchor=CENTER)
+                                      command=lambda: register(window,registration_frame,s_image[0], password_entry.get(), user_entry.get(), reenter_password_entry.get())).place(relx=0.5, rely=0.8, anchor=CENTER)
     
     # Back Button
     custom_button.TkinterCustomButton(master=registration_frame, text="Go Back", height=40, corner_radius=10,

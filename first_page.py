@@ -65,7 +65,7 @@ def start(win):
     menu_frame.pack(fill='both', expand=1)
 
     label = Label(menu_frame, text="Graphical Password Authentication System \nfor Non-Human Intruder Defence", font=('Goudy Old Style', 35), bg="#F5F5DC")
-    label.pack(padx=50, pady=50)
+    label.pack(padx=50, pady=100)
 
     btn_height = 250
     btn_width = 250
@@ -78,7 +78,7 @@ def start(win):
     # Create a button with an image
     btn = Button(menu_frame, image=img, height=btn_height, width=btn_width, command=lambda: load_main(win, menu_frame), bd=0)
     btn.image = img  # Keep a reference to avoid garbage collection
-    btn.pack(padx=100, pady=100)
+    btn.pack(padx=100)
 
 if __name__ == "__main__":
     win = Tk()

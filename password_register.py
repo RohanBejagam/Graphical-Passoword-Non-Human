@@ -11,6 +11,7 @@ import utils
 from PIL import ImageTk, Image
 from tkinter import Entry
 import password
+import password_login
 
 
 s_image = []
@@ -19,6 +20,9 @@ s_image.append("")
 def load_menu(window, frame):
     frame.pack_forget()
     password.start(window)
+def load_login(window,frame):
+    frame.pack_forget()
+    password_login.start(window)
 
 # saves image selected by user
 def clicked(canvas, img_name, event):
@@ -35,8 +39,10 @@ def get_images_from_directory(category, num_images):
     return selected_images
 
 #register
+global auth
 def register(selected_image,selected_password, selected_name,selected_reenter_password):
     # checks if there is no empty entry
+    auth=0
     if selected_name == "" and selected_password == "":
         messagebox.showinfo("Registration System", "Please enter the Username and Password")
     elif selected_name == "":
@@ -64,9 +70,11 @@ def register(selected_image,selected_password, selected_name,selected_reenter_pa
             cursor.execute("INSERT INTO credentials_table (username,password,image_category) VALUES (?, ?, ?)",(selected_name,selected_password,selected_image))
             conn.commit()
             messagebox.showinfo("Registration System","User Registered Successfully!")
+            auth=1
         else:
             # print("Username already exists!!")
             messagebox.showinfo("Registration System", "Username already exists!!")
+    
     
     # file reading to get original credentials
     # while True:
@@ -176,7 +184,6 @@ def register(selected_image,selected_password, selected_name,selected_reenter_pa
 #     custom_button.TkinterCustomButton(master=registration_frame, text="Go Back", height=40, corner_radius=10,
 #                                       command=lambda: load_menu(window, registration_frame)).place(relx=0.08, rely=0.08, anchor=CENTER)
 #     window.mainloop()
-
 def create_registration_canvas(window):
     window.title("Registration Page")
     

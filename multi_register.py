@@ -110,29 +110,29 @@ def register(window,registration_frame,selected_image,selected_password, selecte
 def create_registration_canvas(window):
     window.title("Registration Page")
     
-    registration_frame=Frame(window, height=600, width=1280)
+    registration_frame=Frame(window, height=600, width=1280,bg='#F5F5DC')
     registration_frame.pack(fill='both', expand=1)
     
     width = 700
     height = 700
     
-    canvas = Canvas(registration_frame, width=width, height=height, bd=0, highlightthickness=0)
+    canvas = Canvas(registration_frame, width=width, height=height, bd=0, highlightthickness=0,bg='#F5F5DC')
     canvas.pack(fill=BOTH, expand=True)
     canvas.create_image(0,0,anchor='nw')
-    label = Label(registration_frame, text="Registration Page", font=("Arial 15 bold"))
+    label = Label(registration_frame, text="Registration Page", font=("Arial 15 bold"),bg='#F5F5DC')
     canvas.create_window(550,40,anchor="nw",window=label)
     
     # Registration form labels
-    user_label = Label(registration_frame, text="User name:", font=("Arial 12 bold"))
+    user_label = Label(registration_frame, text="User name:", font=("Arial 12 bold"),bg='#F5F5DC')
     canvas.create_window(480, 130, anchor="nw", window=user_label)
 
-    password_label = Label(registration_frame, text="Password:", font=("Arial 12 bold"))
+    password_label = Label(registration_frame, text="Password:", font=("Arial 12 bold"),bg='#F5F5DC')
     canvas.create_window(480, 180, anchor="nw", window=password_label)
 
-    reenter_label = Label(registration_frame, text="Re-enter Password:", font=("Arial 12 bold"))
+    reenter_label = Label(registration_frame, text="Re-enter Password:", font=("Arial 12 bold"),bg='#F5F5DC')
     canvas.create_window(480, 230, anchor="nw", window=reenter_label)
 
-    image_label = Label(registration_frame, text="Choose an Image", font=("Arial 12 bold"))
+    image_label = Label(registration_frame, text="Choose an Image", font=("Arial 12 bold"),bg='#F5F5DC')
     canvas.create_window(580, 280, anchor="nw", window=image_label)
     
     # Registration form entry fields
@@ -162,7 +162,7 @@ def create_registration_canvas(window):
         selected_images = get_images_from_directory(category, num_images_per_category)
 
         for j, img_name in enumerate(selected_images):
-            canvas = Canvas(registration_frame, width=110, height=70)
+            canvas = Canvas(registration_frame, width=110, height=70,bg='#F5F5DC')
             
             canvas.bind("<Button-1>", lambda event, canvas=canvas, img_name=img_name: clicked(canvas, img_name, event))
             img_path = os.path.join("credentialImages", img_name)

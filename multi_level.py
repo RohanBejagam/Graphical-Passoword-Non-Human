@@ -21,9 +21,9 @@ def load_menu(window, frame):
 def start(window):
     btn_font = ('Trebuchet MS', 16)
     window.title("Password Image Authentication System")
-    password_selector = Frame(window, height=600, width=1280)
+    password_selector = Frame(window, height=600, width=1280,bg='#F5F5DC')
     password_selector.pack(fill='both', expand=1)
-    label = Label(password_selector, text="Multi Level Authentication System", font=('Freestyle Script', 50))
+    label = Label(password_selector, text="Multi Level Authentication System",  font=('Goudy Old Style', 40),bg='#F5F5DC')
     label.pack(padx=40, pady=30)
     
     img1 = Image.open("assets/register.png")

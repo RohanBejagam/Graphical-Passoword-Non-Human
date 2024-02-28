@@ -196,7 +196,7 @@ def create_registration_canvas(window):
     width = 700
     height = 700
     
-    canvas = Canvas(registration_frame, width=width, height=height, bd=0, highlightthickness=0)
+    canvas = Canvas(registration_frame, width=width, height=height, bd=0, highlightthickness=0,bg='#F5F5DC')
     canvas.pack(fill=BOTH, expand=True)
     canvas.create_image(0,0,anchor='nw')
     label = Label(registration_frame, text="Registration Page", font=("Arial 15 bold"),bg='#F5F5DC')
@@ -225,7 +225,7 @@ def create_registration_canvas(window):
     canvas.create_window(640, 180, anchor="nw", window=password_entry)
 
     reenter_pas = StringVar()
-    reenter_password_entry = Entry(registration_frame, textvar=reenter_pas, font=("Arial 12"), show="*")
+    reenter_password_entry = Entry(registration_frame, textvar=reenter_pas, font=("Arial 12"),show="*")
     canvas.create_window(640, 230, anchor="nw", window=reenter_password_entry)
 
     # You may need to adjust the image selection mechanism based on your requirements

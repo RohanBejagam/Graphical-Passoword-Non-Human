@@ -22,15 +22,15 @@ def start(window):
     window.title("Graphical Authentication System")
     window.geometry("1280x600")
 
-    segments_frame = Frame(window, height=600, width=1280)
+    segments_frame = Frame(window, height=600, width=1280,bg='#F5F5DC')
     segments_frame.pack(fill='both', expand=1)
 
-    label = Label(segments_frame, text="Please select the pictures in correct order", font=('Calibri', 20))
+    label = Label(segments_frame, text="Please select the pictures in correct order", font=('Calibri', 20),bg='#F5F5DC')
     label.pack(padx=400, pady=10)
 
     ## Draw order image
 
-    canvas = Canvas(segments_frame, width=300, height=250)
+    canvas = Canvas(segments_frame, width=300, height=250,bg='#F5F5DC')
     canvas.bind("<Button-1>", utils.callback)
     img = (Image.open("segmentedImages/order.jpg"))
     img = img.resize((300, 250)) #Image.ANTIALIAS
@@ -52,7 +52,7 @@ def start(window):
 
     # Draw shuffled segments
 
-    canvas2 = Canvas(segments_frame, width=200, height=150)
+    canvas2 = Canvas(segments_frame, width=200, height=150,bg='#F5F5DC')
     canvas2.bind("<Button-1>", imgClickData[0].clicked)
     canvas2.place(x=100, y=400)
     img2 = (Image.open(imgList[0]))
@@ -60,7 +60,7 @@ def start(window):
     img2 = ImageTk.PhotoImage(img2)
     canvas2.create_image(10, 10, anchor=NW, image=img2)
 
-    canvas3 = Canvas(segments_frame, width=200, height=150)
+    canvas3 = Canvas(segments_frame, width=200, height=150,bg='#F5F5DC')
     canvas3.bind("<Button-1>", imgClickData[1].clicked)
     canvas3.place(x=400, y=400)
     img3 = (Image.open(imgList[1]))
@@ -68,7 +68,7 @@ def start(window):
     img3 = ImageTk.PhotoImage(img3)
     canvas3.create_image(10, 10, anchor=NW, image=img3)
 
-    canvas4 = Canvas(segments_frame, width=200, height=150)
+    canvas4 = Canvas(segments_frame, width=200, height=150,bg='#F5F5DC')
     canvas4.bind("<Button-1>", imgClickData[2].clicked)
     canvas4.place(x=700, y=400)
     img4 = (Image.open(imgList[2]))
@@ -76,7 +76,7 @@ def start(window):
     img4 = ImageTk.PhotoImage(img4)
     canvas4.create_image(10, 10, anchor=NW, image=img4)
 
-    canvas5 = Canvas(segments_frame, width=200, height=150)
+    canvas5 = Canvas(segments_frame, width=200, height=150,bg='#F5F5DC')
     canvas5.bind("<Button-1>", imgClickData[3].clicked)
     canvas5.place(x=1000, y=400)
     img5 = (Image.open(imgList[3]))

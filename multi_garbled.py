@@ -122,7 +122,7 @@ def start(window):
         original_text=fetcher() 
         
         img = (Image.open("garbledImages/" + filename))
-        img = img.resize((450, 300))
+        img = img.resize((200, 200))
         img = ImageTk.PhotoImage(img)
         canvas.itemconfig(image_on_canvas, image=img)
 
@@ -147,21 +147,22 @@ def start(window):
     window.title("Graphical Authentication System")
     window.geometry("1280x600")
 
-    garbled_frame = Frame(window, height=600, width=1280)
+    garbled_frame = Frame(window, height=600, width=1280,bg='#F5F5DC')
     garbled_frame.pack(fill='both', expand=1)
+    label = Label(garbled_frame, text="Garbled Image Authentication", font=('Calibri', 40),bg='#F5F5DC')
+    label.pack(padx=40, pady=20)
+    label = Label(garbled_frame, text="Type the words in the image", font=('Calibri', 20),bg='#F5F5DC')
+    label.pack(padx=40, pady=30)
 
-    label = Label(garbled_frame, text="Type the words in the image", font=('Calibri', 20))
-    label.pack(padx=40, pady=10)
-
-    canvas = Canvas(garbled_frame, width=450, height=300)
+    canvas = Canvas(garbled_frame, width=200, height=150,bg='#F5F5DC')
     img = (Image.open("garbledImages/" + filename))
-    img = img.resize((450, 300))
+    img = img.resize((200, 150))
     img = ImageTk.PhotoImage(img)
     image_on_canvas = canvas.create_image(10, 10, anchor=NW, image=img)
-    canvas.place(relx=0.45, rely=0.5, anchor=E)
+    canvas.place(relx=0.40, rely=0.5, anchor=E)
 
     timer = 30
-    timer_label = Label(garbled_frame, text=f"Time left: {timer} seconds", font=('Calibri', 16))
+    timer_label = Label(garbled_frame, text=f"Time left: {timer} seconds", font=('Calibri', 16),bg='#F5F5DC')
     timer_label.place(relx=0.5, rely=0.9, anchor=CENTER)
 
     def check():
@@ -181,7 +182,7 @@ def start(window):
             reset_timer()
 
     input = StringVar()
-    Label(garbled_frame, text="Enter word", font="ariel 16 bold").place(relx=0.7, rely=0.40, anchor=CENTER)
+    Label(garbled_frame, text="Enter word", font="ariel 16 bold").place(relx=0.7, rely=0.40, anchor=CENTER,bg='#F5F5DC')
     Entry(garbled_frame, textvariable=input, font="ariel 12 bold", relief="groove", width=30, justify=CENTER).place(
         relx=0.7,
         rely=0.5,

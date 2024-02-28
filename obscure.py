@@ -88,7 +88,7 @@ def start(window):
     
     window.title("Graphical Authentication System")
     window.geometry("1280x600")
-
+    heading=Label(obscure_frame,text="obscure Image Authentication System",font=('Calibri,25'))
     label = Label(obscure_frame, text="Click on the microphone and speak the words in the following image",
                   font=('Calibri', 20))
     label.pack(padx=40, pady=10)
@@ -97,7 +97,7 @@ def start(window):
 
     canvas = Canvas(obscure_frame, width=450, height=300)
     img = (Image.open("obscuredImages/" + filename))
-    img = img.resize((450, 300))
+    img = img.resize((300, 200))
     img = ImageTk.PhotoImage(img)
     canvas.create_image(10, 10, anchor=NW, image=img)
     canvas.pack(padx=10, pady=10)
@@ -105,7 +105,7 @@ def start(window):
     canvas2 = Canvas(obscure_frame, width=200, height=170)
     canvas2.bind("<Button-1>", toggle)
     img2 = (Image.open("assets/mic.jpg"))
-    img2 = img2.resize((200, 170))
+    img2 = img2.resize((100, 80))
     img2 = ImageTk.PhotoImage(img2)
     canvas2.create_image(10, 10, anchor=NW, image=img2)
     canvas2.pack(padx=20, pady=10)

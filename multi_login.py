@@ -14,6 +14,7 @@ from tkinter import Entry
 import password
 import multi_segments 
 import multi_level
+import main_menu
 
 s_image = []
 s_image.append("")
@@ -21,6 +22,9 @@ width=0
 def load_menu(window, frame):
     frame.pack_forget()
     multi_level.start(window)
+def load_main(window, frame):
+    frame.pack_forget()
+    main_menu.start(window)
 
 def load_segments(window,frame):
     frame.pack_forget()
@@ -81,11 +85,19 @@ def new_images(login_frame):
     
     return photo_images,canvases
 
-    
+def start(window):
+    global cursor,conn,failed_attempts
+    conn=sqlite3.connect("credentialImages/credentials_db.db")
+    cursor=conn.cursor()
+    failed_attempts = 0 
+    print('Database connected Login Page')
+    create_canvas(window)
+    conn.close()
 # authenticate credentials provided by users
 global auth
 def authenticate(window, login_frame, selected_image, selected_password, selected_name,photo_images, canvases):
     auth=0
+    global failed_attempts
     # checks if there is no empty entry
     if selected_name == "":
         messagebox.showinfo("Login System", "Please enter the Username")
@@ -125,30 +137,36 @@ def authenticate(window, login_frame, selected_image, selected_password, selecte
         # checks the credentials by somparing with original one
     if not result:
         # print("password is not correct")
-        messagebox.showinfo("Login System", "Wrong Username/Password")
+        failed_attempts += 1  # Increment the failed attempts counter
+        if failed_attempts >= 2:  # Check if the threshold is reached
+            messagebox.showinfo("Login System", "Too many failed attempts. Redirecting to main menu.")
+            load_main(window, login_frame)  # Redirect to main menu
+        else:
+            messagebox.showinfo("Login System", "Wrong Username/Password")
     else:
         username,password,image=result
-        if password == selected_password:
-            if image == selected_image:
-                print("password level authenticated!!")
-                auth=1
-                utils.create_popup(msg="Loading next method...", font="Gabriola 28 bold")
+        if password == selected_password and image == selected_image:
+            print("password level authenticated!!")
+            auth=1
+            utils.create_popup(msg="Loading next method...", font="Gabriola 28 bold")
                 # messagebox.showinfo("Login System", "Authenticated!!")
                 # load_segments(window,login_frame)
                 # break
-            else:
-                print("image is not correct")
-                messagebox.showinfo("Login System", "Wrong Username/Password")
-                # break
+            failed_attempts=0
         else:
-            print("password is not correct")
-            messagebox.showinfo("Login System", "Wrong Username/Password")
-            for c in canvases:
-                c.config(highlightthickness=0)
-            new_photo_images, new_canvases = new_images(login_frame)
-            # Replace old references with new ones
-            photo_images[:] = new_photo_images
-            canvases[:] = new_canvases
+            failed_attempts += 1  # Increment the failed attempts counter
+            if failed_attempts >= 2:  # Check if the threshold is reached
+                messagebox.showinfo("Login System", "Too many failed attempts. Redirecting to main menu.")
+                load_main(window, login_frame)  # Redirect to main menu
+            else:
+                print("password is not correct")
+                messagebox.showinfo("Login System", "Wrong Username/Password")
+                for c in canvases:
+                    c.config(highlightthickness=0)
+                new_photo_images, new_canvases = new_images(login_frame)
+                # Replace old references with new ones
+                photo_images[:] = new_photo_images
+                canvases[:] = new_canvases
             # break
     if auth == 1:
         load_segments(window,login_frame)
@@ -207,10 +225,3 @@ def create_canvas(window):
     
     window.mainloop()
 
-def start(window):
-    global cursor,conn
-    conn=sqlite3.connect("credentialImages/credentials_db.db")
-    cursor=conn.cursor()
-    print('Database connected Login Page')
-    create_canvas(window)
-    conn.close()

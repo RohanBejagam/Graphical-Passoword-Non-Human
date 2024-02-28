@@ -45,27 +45,27 @@ def start(win):
     btn_width = 450
     btn_font = ('Footlight MT Light', 18,'bold')
 
-    btn1 = custom_button.TkinterCustomButton(master=menu_frame, text="Test Garbled Images", text_font=btn_font,
+    btn1 = custom_button.TkinterCustomButton(master=menu_frame, text="Garbled Image Authentication", text_font=btn_font,
                                              height=btn_height, width=btn_width, corner_radius=10,
                                              command=lambda: load_garbled(win, menu_frame)).place(relx=0.3, rely=0.4,
                                                                                                   anchor=CENTER)
-    btn2 = custom_button.TkinterCustomButton(master=menu_frame, text="Test Segmented Images", text_font=btn_font,
+    btn2 = custom_button.TkinterCustomButton(master=menu_frame, text="Segmented Image Authentication", text_font=btn_font,
                                              height=btn_height, width=btn_width, corner_radius=10,
                                              command=lambda: load_segmented(win, menu_frame)).place(relx=0.3,
                                                                                                     rely=0.6,
                                                                                                     anchor=CENTER)
-    btn3 = custom_button.TkinterCustomButton(master=menu_frame, text="Test Obscured Images", text_font=btn_font,
+    btn3 = custom_button.TkinterCustomButton(master=menu_frame, text="Obscured Image Authentication", text_font=btn_font,
                                              height=btn_height, width=btn_width, corner_radius=10,
                                              command=lambda: load_obscured(win, menu_frame)).place(relx=0.7,
                                                                                                    rely=0.4,
                                                                                                    anchor=CENTER)
-    btn4 = custom_button.TkinterCustomButton(master=menu_frame, text="Test Password/Image Authentication",
+    btn4 = custom_button.TkinterCustomButton(master=menu_frame, text="Password/Image Authentication",
                                              text_font=btn_font,
                                              height=btn_height, width=btn_width, corner_radius=10,
                                              command=lambda: load_password(win, menu_frame)).place(relx=0.7,
                                                                                                    rely=0.6,
                                                                                                    anchor=CENTER)
-    btn5 = custom_button.TkinterCustomButton(master=menu_frame, text="Sample Multi Level Authentication",
+    btn5 = custom_button.TkinterCustomButton(master=menu_frame, text="Multi Level Authentication",
                                              text_font=btn_font,
                                              height=btn_height, width=btn_width, corner_radius=10,
                                              command=lambda: sample_system(win, menu_frame)).place(relx=0.5,

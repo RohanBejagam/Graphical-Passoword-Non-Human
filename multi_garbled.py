@@ -152,14 +152,14 @@ def start(window):
     label = Label(garbled_frame, text="Garbled Image Authentication", font=('Calibri', 40),bg='#F5F5DC')
     label.pack(padx=40, pady=20)
     label = Label(garbled_frame, text="Type the words in the image", font=('Calibri', 20),bg='#F5F5DC')
-    label.pack(padx=40, pady=30)
+    label.pack(padx=40, pady=20)
 
-    canvas = Canvas(garbled_frame, width=200, height=150,bg='#F5F5DC')
+    canvas = Canvas(garbled_frame, width=300, height=250,bg='#F5F5DC')
     img = (Image.open("garbledImages/" + filename))
-    img = img.resize((200, 150))
+    img = img.resize((300, 250))
     img = ImageTk.PhotoImage(img)
     image_on_canvas = canvas.create_image(10, 10, anchor=NW, image=img)
-    canvas.place(relx=0.40, rely=0.5, anchor=E)
+    canvas.place(relx=0.40, rely=0.53, anchor=E)
 
     timer = 30
     timer_label = Label(garbled_frame, text=f"Time left: {timer} seconds", font=('Calibri', 16),bg='#F5F5DC')
@@ -182,7 +182,7 @@ def start(window):
             reset_timer()
 
     input = StringVar()
-    Label(garbled_frame, text="Enter word", font="ariel 16 bold").place(relx=0.7, rely=0.40, anchor=CENTER,bg='#F5F5DC')
+    Label(garbled_frame, text="Enter word", font="ariel 16 bold",bg='#F5F5DC').place(relx=0.7, rely=0.40, anchor=CENTER)
     Entry(garbled_frame, textvariable=input, font="ariel 12 bold", relief="groove", width=30, justify=CENTER).place(
         relx=0.7,
         rely=0.5,

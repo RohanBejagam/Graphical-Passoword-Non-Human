@@ -55,7 +55,7 @@ def new_images(login_frame):
         selected_images = get_images_from_directory(category, num_images_per_category)
 
         for j, img_name in enumerate(selected_images):
-            canvas = Canvas(login_frame, width=110, height=70,bg='#F5F5DC')
+            canvas = Canvas(login_frame, width=110, height=70)
             
             canvas.bind("<Button-1>", lambda event, canvas=canvas, img_name=img_name: clicked(canvases, canvas, img_name, event))
             img_path = os.path.join("credentialImages", img_name)
@@ -202,24 +202,24 @@ def create_canvas(window):
     window.title("Login Page")
     window.geometry("1280x600")
 
-    login_frame = Frame(window, height=600, width=1280,bg='#F5F5DC')
+    login_frame = Frame(window, height=600, width=1280)
     login_frame.pack(fill='both', expand=1)
 
     width = 700
     height = 700
     # canvas for title
-    canvas = Canvas(login_frame, width=width, height=height, bd=0, highlightthickness=0,bg='#F5F5DC')
+    canvas = Canvas(login_frame, width=width, height=height, bd=0, highlightthickness=0)
     canvas.pack(fill=BOTH, expand=True)
     canvas.create_image(0, 0, anchor='nw')
-    label = Label(login_frame, text="Login Page", font=("Ariel 15 bold"),bg='#F5F5DC')
+    label = Label(login_frame, text="Login Page", font=("Ariel 15 bold"))
     canvas.create_window(550, 40, anchor="nw", window=label)
 
     # canvas for username title
-    user_label = Label(login_frame, text="User name:", font=("Ariel 12 bold"),bg='#F5F5DC')
+    user_label = Label(login_frame, text="User name:", font=("Ariel 12 bold"))
     canvas.create_window(480, 130, anchor="nw", window=user_label)
 
     # canvas for password title
-    password_label = Label(login_frame, text="Password:", font=("Ariel 12 bold"),bg='#F5F5DC')
+    password_label = Label(login_frame, text="Password:", font=("Ariel 12 bold"))
     canvas.create_window(480, 210, anchor="nw", window=password_label)
 
     # usernmae input field display

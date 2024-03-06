@@ -8,6 +8,7 @@ import speech_recognition as sr
 import utils
 from PIL import ImageTk, Image
 import random
+import concurrent.futures
 
 def load_menu(window, frame):
     frame.pack_forget()
@@ -59,7 +60,15 @@ def start(window):
         cursor.execute('SELECT original_obscured from obscured_table where filename=?',[base_name,])
         return cursor.fetchone()[0]
     
-    original_text=fetcher().rstrip()
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        future = executor.submit(fetcher)
+        try:
+            original_text = future.result(timeout=60)  # Set a timeout of 60 seconds
+            # print("Original text:", original_text)
+        except concurrent.futures.TimeoutError:
+            print("Timeout: Maximum wait time exceeded.")
+    
+    original_text=original_text.rstrip()
   
     obscure_frame = Frame(window, height=600, width=1280,bg='#F5F5DC')
     obscure_frame.pack(fill='both', expand=True)  # Make the frame expand to fill its container

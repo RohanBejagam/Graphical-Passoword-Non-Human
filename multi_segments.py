@@ -25,24 +25,33 @@ def start(window):
     segments_frame = Frame(window, height=600, width=1280,bg='#F5F5DC')
     segments_frame.pack(fill='both', expand=1)
 
-    label = Label(segments_frame, text="Please select the pictures in correct order", font=('Calibri', 20),bg='#F5F5DC')
-    label.pack(padx=400, pady=10)
-
-    ## Draw order image
-
-    canvas = Canvas(segments_frame, width=300, height=250,bg='#F5F5DC')
+    canvas = Canvas(segments_frame, width=250, height=250,bg='#F5F5DC')
     canvas.bind("<Button-1>", utils.callback)
     img = (Image.open("segmentedImages/order.jpg"))
-    img = img.resize((300, 250)) #Image.ANTIALIAS
+    img = img.resize((250, 250)) #Image.ANTIALIAS
     img = ImageTk.PhotoImage(img)
     canvas.create_image(10, 10, anchor=NW, image=img)
-    canvas.pack(padx=10, pady=10)
+    canvas.place(x=320,y=80)
+    
     all_items= os.listdir("segmentedImages")
     folders = [item for item in all_items if os.path.isdir(os.path.join("segmentedImages", item))]
     selected_set = folders[random.randint(0,len(folders)-1)]
     print(selected_set)
-    imgList = utils.getSegmentedImages(selected_set)
-    # imgList = utils.getSegmentedImages("circle")
+    dir= os.listdir("segmentedImages/"+selected_set)
+    for file in dir:
+        if file.endswith(('.png','.jpg','.jpeg')):
+            selected_set_image=file
+    
+    canvas1 = Canvas(segments_frame, width=260, height=260,bg='#F5F5DC')
+    canvas1.bind("<Button-1>", utils.callback)
+    img1 = (Image.open("segmentedImages/"+selected_set+"/"+selected_set_image))
+    img1 = img1.resize((250, 250)) #Image.ANTIALIAS
+    img1 = ImageTk.PhotoImage(img1)
+    canvas1.create_image(10, 10, anchor=NW, image=img1)
+    canvas1.place(x=670,y=80)
+
+    
+    imgList = utils.getSegmentedImages(selected_set+"/parts")
     random.shuffle(imgList)
     imgClickData = []
 
@@ -50,18 +59,39 @@ def start(window):
         var = utils.imageClick(imgPath)
         imgClickData.append(var)
 
+    def highlight0(event):
+        imgClickData[0].clicked(event)
+        canvas2.config(highlightthickness=1, highlightbackground="black")
+    
+    def highlight1(event):
+        imgClickData[1].clicked(event)
+        canvas3.config(highlightthickness=1, highlightbackground="black")
+    
+    def highlight2(event):
+        imgClickData[2].clicked(event)
+        canvas4.config(highlightthickness=1, highlightbackground="black")
+    
+    def highlight3(event):
+        imgClickData[3].clicked(event)
+        canvas5.config(highlightthickness=1, highlightbackground="black")
+        
     # Draw shuffled segments
+    label = Label(segments_frame, text="Please select below pictures in correct order", font=('Calibri', 20),bg='#F5F5DC')
+    label.place(x=400, y=350)
+
 
     canvas2 = Canvas(segments_frame, width=200, height=150,bg='#F5F5DC')
-    canvas2.bind("<Button-1>", imgClickData[0].clicked)
+    canvas2.bind("<Button-1>", highlight0)
+    # canvas.config(highlightthickness=1, highlightbackground="black")
     canvas2.place(x=100, y=400)
     img2 = (Image.open(imgList[0]))
     img2 = img2.resize((200, 150)) #Image.ANTIALIAS
     img2 = ImageTk.PhotoImage(img2)
     canvas2.create_image(10, 10, anchor=NW, image=img2)
 
+        
     canvas3 = Canvas(segments_frame, width=200, height=150,bg='#F5F5DC')
-    canvas3.bind("<Button-1>", imgClickData[1].clicked)
+    canvas3.bind("<Button-1>", highlight1)
     canvas3.place(x=400, y=400)
     img3 = (Image.open(imgList[1]))
     img3 = img3.resize((200, 150)) #Image.ANTIALIAS
@@ -69,7 +99,7 @@ def start(window):
     canvas3.create_image(10, 10, anchor=NW, image=img3)
 
     canvas4 = Canvas(segments_frame, width=200, height=150,bg='#F5F5DC')
-    canvas4.bind("<Button-1>", imgClickData[2].clicked)
+    canvas4.bind("<Button-1>", highlight2)
     canvas4.place(x=700, y=400)
     img4 = (Image.open(imgList[2]))
     img4 = img4.resize((200, 150)) #Image.ANTIALIAS
@@ -77,7 +107,7 @@ def start(window):
     canvas4.create_image(10, 10, anchor=NW, image=img4)
 
     canvas5 = Canvas(segments_frame, width=200, height=150,bg='#F5F5DC')
-    canvas5.bind("<Button-1>", imgClickData[3].clicked)
+    canvas5.bind("<Button-1>", highlight3)
     canvas5.place(x=1000, y=400)
     img5 = (Image.open(imgList[3]))
     img5 = img5.resize((200, 150)) #Image.ANTIALIAS

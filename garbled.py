@@ -8,6 +8,7 @@ import utils
 from PIL import ImageTk, Image
 import random
 import sqlite3 
+import concurrent.futures
 
 
 def load_menu(window, frame):
@@ -61,8 +62,14 @@ def start(window):
         cursor.execute('SELECT original_text from garbled_table WHERE original_text=?',[base_name,])
         return cursor.fetchone()[0]
     
-    
-    original_text=fetcher()    
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        future = executor.submit(fetcher)
+        try:
+            original_text = future.result(timeout=60)  # Set a timeout of 60 seconds
+            # print("Original text:", original_text)
+        except concurrent.futures.TimeoutError:
+            print("Timeout: Maximum wait time exceeded.")
+    # original_text= fetcher()    
     
     window.title("Graphical Authentication System")
     window.geometry("1280x600")
@@ -97,6 +104,7 @@ def start(window):
         if entered_text == original_text:
             # print("Authenticated")
             utils.create_popup(msg="Authenticated :)", font="Gabriola 28 bold")
+            
             load_menu(window,garbled_frame)
             # print("Nenu execute aithunna")
             # reset_timer()

@@ -22,18 +22,17 @@ def start(window):
     segments_frame = Frame(window, height=600, width=1280,bg='#F5F5DC')
     segments_frame.pack(fill='both', expand=1)
 
-    label = Label(segments_frame, text="Please select the pictures in correct order", font=('Calibri', 20),bg='#F5F5DC')
-    label.pack(padx=400, pady=10)
-
     ## Draw order image
+    label = Label(segments_frame, text="Segmented Image Authentication", font=('Goudy Old Style', 30),bg='#F5F5DC')
+    label.pack(padx=100, pady=10)
 
-    canvas = Canvas(segments_frame, width=300, height=250,bg='#F5F5DC')
+    canvas = Canvas(segments_frame, width=280, height=230,bg='#F5F5DC')
     canvas.bind("<Button-1>", utils.callback)
     img = (Image.open("segmentedImages/order.jpg"))
-    img = img.resize((300, 250)) #Image.ANTIALIAS
+    img = img.resize((280, 230)) #Image.ANTIALIAS
     img = ImageTk.PhotoImage(img)
     canvas.create_image(10, 10, anchor=NW, image=img)
-    canvas.pack(padx=10, pady=10)
+    canvas.pack(padx=10, pady=8)
     all_items= os.listdir("segmentedImages")
     folders = [item for item in all_items if os.path.isdir(os.path.join("segmentedImages", item))]
     selected_set = folders[random.randint(0,len(folders)-1)]
@@ -47,6 +46,8 @@ def start(window):
         imgClickData.append(var)
 
     # Draw shuffled segments
+    label = Label(segments_frame, text="Please select below pictures in correct order", font=('Calibri', 20),bg='#F5F5DC')
+    label.pack(padx=400, pady=5)
 
     canvas2 = Canvas(segments_frame, width=200, height=150,bg='#F5F5DC')
     canvas2.bind("<Button-1>", imgClickData[0].clicked)

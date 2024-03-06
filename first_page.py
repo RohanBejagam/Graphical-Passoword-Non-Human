@@ -72,7 +72,7 @@ def start(win):
 
     # Load and resize the image
     img = Image.open("assets/logo.png")
-    img = img.resize((btn_width, btn_height), Image.ANTIALIAS)
+    img = img.resize((btn_width, btn_height))
     img = ImageTk.PhotoImage(img)
 
     # Create a button with an image

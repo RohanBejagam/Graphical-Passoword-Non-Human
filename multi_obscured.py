@@ -82,6 +82,7 @@ def start(window):
             e = sr.Recognizer()
             with sr.Microphone() as source:
                 try:
+                    utils.create_popup1(msg="Speak now", font="Gabriola 28 bold")
                     print("Say Something. Say 'stop' inorder to stop ")
                     audio = e.listen(source)
                     input_text = e.recognize_google(audio)

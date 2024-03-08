@@ -94,3 +94,16 @@ def create_popup(size="500x200", msg="default", font='Arial 24', x=140, y=70):
 
     win.destroy()
     return
+
+def create_popup1(size="500x200", msg="default", font='Arial 24', x=140, y=70):
+    win = Tk()
+    win.geometry(size)
+    win.title("Message")
+    Label(win, text=msg, font=font).place(x=x, y=y)
+
+    for i in range(50000):
+        win.update_idletasks()
+        win.update()
+
+    win.destroy()
+    return

@@ -20,6 +20,7 @@ def toggle(event):
         e = sr.Recognizer()
         with sr.Microphone() as source:
             try:
+                utils.create_popup1(msg="Speak now", font="Gabriola 28 bold")
                 print("Say Something. Say 'stop' inorder to stop")
                 audio = e.listen(source)
                 input_text = e.recognize_google(audio)
@@ -69,6 +70,7 @@ def start(window):
             print("Timeout: Maximum wait time exceeded.")
     
     original_text=original_text.rstrip()
+    # original_text=fetcher().rstrip()
   
     obscure_frame = Frame(window, height=600, width=1280,bg='#F5F5DC')
     obscure_frame.pack(fill='both', expand=True)  # Make the frame expand to fill its container
